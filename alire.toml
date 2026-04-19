@@ -1,5 +1,5 @@
 name = "espidf"
-description = "ESP-IDF"
+description = "Ada/ESP-IDF"
 version = "0.1.0-dev"
 
 authors = ["Vadim Godunko"]
