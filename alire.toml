@@ -1,6 +1,10 @@
 name = "espidf"
 description = "Ada/ESP-IDF"
 version = "0.1.0-dev"
+long-description = """
+This is the base crate for Ada bindings to the ESP-IDF (Espressif IoT Development Framework).
+It provides the foundational type definitions and root package hierarchy required to build Ada applications for Espressif SoC platforms.
+"""
 
 authors = ["Vadim Godunko"]
 maintainers = ["Vadim Godunko <vgodunko@gmail.com>"]
