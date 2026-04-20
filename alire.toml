@@ -11,7 +11,7 @@ authors = ["Vadim Godunko"]
 maintainers = ["Vadim Godunko <vgodunko@gmail.com>"]
 maintainers-logins = ["godunko"]
 licenses = "Apache-2.0 WITH LLVM-exception"
-tags = ["embedded", "espidf"]
+tags = ["embedded", "esp32", "espidf"]
 
 [configuration]
 generate_ada = false
