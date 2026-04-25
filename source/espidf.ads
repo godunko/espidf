@@ -17,6 +17,7 @@ package ESPIDF with Pure is
 
    type esp_err_t is new int;
 
-   ESP_OK : constant esp_err_t := 0;
+   ESP_OK                   : constant esp_err_t := 0;
+   ESP_ERR_INVALID_RESPONSE : constant esp_err_t := 16#108#;
 
 end ESPIDF;
