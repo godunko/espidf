@@ -14,7 +14,8 @@ It provides the foundational type definitions and root package hierarchy require
 
 The following crates build upon this base layer:
 
- * [espidf_driver_i2c](https://github.com/godunko/espidf_driver_i2c): Bindings for the I2C peripheral driver.
+ * [espidf_console](https://github.com/godunko/espidf_console): binding of ESP-IDF Console
+ * [espidf_driver_i2c](https://github.com/godunko/espidf_driver_i2c): bindings of the I2C peripheral driver
  * (More components coming soon)
 
 ## Getting Started: Project Template
