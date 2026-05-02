@@ -20,7 +20,7 @@ The following crates build upon this base layer:
 
 ## Getting Started: Project Template
 
-To jumpstart your development, we provide a [Project Template](https://github.com/godunko/esp32s3_template) that configures the GNAT project files and ESP-IDF build environment specifically for the ESP32S3.
+To jumpstart your development, we provide a [ESP32C3 Project Template](https://github.com/godunko/esp32c3_template) and [ESP32S3 Project Template](https://github.com/godunko/esp32s3_template) that configures the GNAT project files and ESP-IDF build environment specifically for corresponsing MCU.
 
 ## Usage
 
@@ -29,7 +29,7 @@ Once your project structure is set up from the Project Template, the development
 1. Ada Dependencies: Use Alire to include the binding's crates into your Ada application.
 
 ```
-alr with espidf
+alr with espidf_console
 alr with espidf_driver_i2c
 ```
 
@@ -37,10 +37,10 @@ alr with espidf_driver_i2c
 
 ```
 idf_component_register(
-    REQUIRES espidf_gnat_runtime esp_driver_i2c)
+    REQUIRES esp_driver_i2c)
 ...
-add_prebuilt_library(libadaapplication "${COMPONENT_LIB}"
-    REQUIRES espidf_gnat_runtime esp_driver_i2c)
+add_prebuilt_library(app_main "${COMPONENT_LIB}"
+    REQUIRES esp_driver_i2c)
 ```
 
 3. Build
