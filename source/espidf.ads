@@ -4,6 +4,8 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
+pragma Ada_2022;
+
 with Interfaces.C;
 
 package ESPIDF with Pure is
@@ -35,6 +37,6 @@ package ESPIDF with Pure is
    ESP_ERR_NOT_FINISHED     : constant esp_err_t := 16#10C#;
    ESP_ERR_NOT_ALLOWED      : constant esp_err_t := 16#10D#;
 
-   function nul return char is (Interfaces.C.nul);
+   function nul return char is (Interfaces.C.nul) with Static;
 
 end ESPIDF;
