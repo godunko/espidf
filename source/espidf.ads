@@ -10,6 +10,11 @@ with Interfaces.C;
 
 package ESPIDF with Pure is
 
+   pragma Warnings
+     (Off, "use clause for type * defined at line * has no effect");
+   --  The above warning is triggered by the use of "use type" for subtypes,
+   --  which is added to avoid their use in almost all child packages.
+
    subtype bool     is Interfaces.C.C_bool;
    subtype char     is Interfaces.C.char;      use type char;
    subtype int      is Interfaces.C.int;
