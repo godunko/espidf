@@ -25,7 +25,7 @@
 --  functions or passed to the subprograms in this package remain valid for
 --  the duration of their use.
 
-package ESPIDF.C_Strings with Preelaborate is
+package ESPIDF.C_Strings with Pure is
 
    type char_array_string is array (uint32_t range <>) of aliased char
      with Convention        => C,
