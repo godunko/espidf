@@ -1,5 +1,5 @@
 
-1. ESP-IDF Error Handling
+## ESP-IDF Error Handling
 
 Many ESP-IDF functions return an error code. These functions are exposed in Ada via two patterns:
 
