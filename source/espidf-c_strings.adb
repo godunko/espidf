@@ -169,4 +169,24 @@ package body ESPIDF.C_Strings is
       end return;
    end To_char_array_string;
 
+   ---------------
+   -- To_String --
+   ---------------
+
+   function To_String (Pointer : const_char_ptr) return String is
+      Iterator : const_char_ptr := Pointer;
+      Offset   : Natural := 0;
+
+   begin
+      return Result : String (1 .. Natural (Length (Pointer))) do
+         if Pointer /= null then
+            while Iterator.all /= nul loop
+               Result (Result'First + Offset) := Character (Iterator.all);
+               Offset   := @ + 1;
+               Iterator := @ + 1;
+            end loop;
+         end if;
+      end return;
+   end To_String;
+
 end ESPIDF.C_Strings;

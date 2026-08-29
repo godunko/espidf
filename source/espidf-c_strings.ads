@@ -25,7 +25,7 @@
 --  functions or passed to the subprograms in this package remain valid for
 --  the duration of their use.
 
-package ESPIDF.C_Strings with Pure is
+package ESPIDF.C_Strings with Preelaborate is
 
    type char_array_string is array (uint32_t range <>) of aliased char
      with Convention        => C,
@@ -69,6 +69,12 @@ package ESPIDF.C_Strings with Pure is
    --
    --  For `null` pointer, an "empty" array is returned (with only the
    --  null-terminator).
+
+   function To_String (Pointer : const_char_ptr) return String;
+   --  Converts the C string pointed to by `Pointer` to an Ada `String`.
+   --  The null-terminator is not included in the resulting `String`.
+   --
+   --  For a null pointer, returns an empty string.
 
    function Length (Pointer : const_char_ptr) return uint32_t;
    --  Returns the length of the C string pointed to by `Pointer`, not
