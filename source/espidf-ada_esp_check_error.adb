@@ -10,30 +10,17 @@ with Ada.Unchecked_Conversion;
 
 with ESPIDF.C_Strings;
 
-package body ESPIDF is
+procedure ESPIDF.Ada_ESP_Check_Error
+  (Code     : esp_err_t;
+   Location : String := GNAT.Source_Info.Source_Location;
+   Entity   : String := GNAT.Source_Info.Enclosing_Entity)
+is
 
    function esp_err_to_name
      (code : esp_err_t) return ESPIDF.C_Strings.const_char_ptr
       with Import, Convention => C, External_Name => "esp_err_to_name";
 
    function Hex_Image (Code : esp_err_t) return String;
-
-   -------------------------
-   -- Ada_ESP_Check_Error --
-   -------------------------
-
-   procedure Ada_ESP_Check_Error
-     (Code     : esp_err_t;
-      Location : String := GNAT.Source_Info.Source_Location;
-      Entity   : String := GNAT.Source_Info.Enclosing_Entity) is
-   begin
-      if Code /= ESP_OK then
-         raise ESPIDF_Error
-           with Hex_Image (Code)
-                  & " (" & ESPIDF.C_Strings.To_String (esp_err_to_name (Code))
-                  & ") at " & Location & " (" & Entity & ")";
-      end if;
-   end Ada_ESP_Check_Error;
 
    ---------------
    -- Hex_Image --
@@ -65,4 +52,11 @@ package body ESPIDF is
       return Buffer (Index .. Buffer'Last);
    end Hex_Image;
 
-end ESPIDF;
+begin
+   if Code /= ESP_OK then
+      raise ESPIDF_Error
+        with Hex_Image (Code)
+               & " (" & ESPIDF.C_Strings.To_String (esp_err_to_name (Code))
+               & ") at " & Location & " (" & Entity & ")";
+   end if;
+end ESPIDF.Ada_ESP_Check_Error;

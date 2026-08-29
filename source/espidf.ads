@@ -8,9 +8,7 @@ pragma Ada_2022;
 
 with Interfaces.C;
 
-private with GNAT.Source_Info;
-
-package ESPIDF with Preelaborate is
+package ESPIDF with Pure is
 
    pragma Warnings
      (Off, "use clause for type * defined at line * has no effect");
@@ -49,13 +47,5 @@ package ESPIDF with Preelaborate is
    ESPIDF_Error : exception;
    --  Raised when an ESP-IDF error occurs and not explicitly handled by the
    --  application.
-
-private
-
-   procedure Ada_ESP_Check_Error
-     (Code     : esp_err_t;
-      Location : String := GNAT.Source_Info.Source_Location;
-      Entity   : String := GNAT.Source_Info.Enclosing_Entity);
-   --  Raises ESPIDF_Error if Error is not ESP_OK.
 
 end ESPIDF;
