@@ -19,6 +19,7 @@ The following crates build upon this base layer:
  * [espidf_driver_gpio](https://github.com/RREE/espidf_driver_gpio): bindings for setting and reading GPIOs
  * [espidf_driver_i2c](https://github.com/godunko/espidf_driver_i2c): bindings of the I2C peripheral driver
  * [espidf_netif](https://github.com/godunko/espidf_netif): bindings of ESP-IDF NETIF library
+ * [espidf_wifi](https://github.com/godunko/espidf_wifi): bindings of ESP-IDF WiFI
  * (More components coming soon)
 
 ## Getting Started: Project Template
