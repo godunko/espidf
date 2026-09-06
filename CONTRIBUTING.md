@@ -27,3 +27,59 @@ private
      with Convention => C;
    -- Full declaration of this type is not visible in "esp_netif.h"
 ```
+
+## Binding Types with Non-Zero Default Initialization
+
+For C struct types that require specific, non-zero default field values (such as configurations initialized via C macros like `HTTPD_DEFAULT_CONFIG()`), Ada bindings encapsulate the C struct as a limited, private, finalizable type.
+
+The binding imports the byte size of the underlying C type and utilizes GNAT's Generalized Finalization extension via the `Finalizable` aspect. Specifying `Relaxed_Finalization => True` allows a limited record to automatically run a C-side initialization function upon object declaration.
+
+```
+   type httpd_config_t is limited private;
+
+private
+
+   sizeof_httpd_config_t : constant int
+      with Import, Convention => C,
+           Link_Name => "__ada_sizeof_httpd_config_t";
+
+   type httpd_config_t_Storage is
+     new System.Storage_Elements.Storage_Array
+       (1 .. System.Storage_Elements.Storage_Count
+               (sizeof_httpd_config_t)) with Convention => C;
+
+   procedure Initialize (Self : in out httpd_config_t);
+
+   type httpd_config_t is limited record
+      Storage : httpd_config_t_Storage := (others => 0);
+   end record
+     with Convention => C,
+          Finalizable =>
+            (Initialize           => Initialize,
+             Relaxed_Finalization => True);
+```
+
+```
+   ----------------
+   -- Initialize --
+   ----------------
+
+   procedure Initialize (Self : in out httpd_config_t) is
+
+      procedure Imported (config : out httpd_config_t)
+        with Import, Convention => C,
+             External_Name => "__ada_HTTPD_DEFAULT_CONFIG";
+
+   begin
+      Imported (Self);
+   end Initialize;
+```
+
+```
+int __ada_sizeof_httpd_config_t = sizeof(httpd_config_t);
+
+void __ada_HTTPD_DEFAULT_CONFIG(httpd_config_t *cfg)
+{
+    *cfg = (httpd_config_t)HTTPD_DEFAULT_CONFIG();
+}
+```
