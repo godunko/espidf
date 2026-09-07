@@ -80,6 +80,22 @@ package ESPIDF.C_Strings with Pure is
    --  Returns the length of the C string pointed to by `Pointer`, not
    --  including the null-terminator. For a null pointer, returns 0.
 
+   function New_String (Item : String) return const_char_ptr
+     with Pre =>
+       (for all J in Item'Range => Item (J) /= ASCII.Nul);
+
+   --  Creates a new C string from the given Ada `String`.
+   --  The returned pointer points to a null-terminated array of `char`.
+   --
+   --  XXX Parameter to specify memory capabilities might be added in the
+   --  future.
+   --
+   --  Caller is responsible for managing the memory of the returned C string.
+
+   procedure Free_String (Item : in out const_char_ptr);
+   --  Frees the memory allocated for the C string pointed to by `Item`.
+   --  `Item` is set to null after freeing the memory.
+
    --------------------
    -- char_ptr_array --
    --------------------

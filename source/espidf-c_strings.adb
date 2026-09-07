@@ -13,6 +13,12 @@ package body ESPIDF.C_Strings is
 
    use type System.Storage_Elements.Storage_Offset;
 
+   type char_array is array (uint32_t range <>) of aliased char
+     with Convention => C;
+   --  This type represents a C array of `char`. There is no assumption of
+   --  its content, in particular, it does not assume a null terminator, or
+   --  use of `nul` as an item.
+
    function "+"
      (Left  : const_char_ptr;
       Right : uint32_t) return const_char_ptr;
@@ -109,6 +115,24 @@ package body ESPIDF.C_Strings is
       end if;
    end Element;
 
+   -----------------
+   -- Free_String --
+   -----------------
+
+   procedure Free_String (Item : in out const_char_ptr) is
+      function As_Address is
+        new Ada.Unchecked_Conversion (const_char_ptr, System.Address);
+
+      procedure free (ptr : System.Address)
+        with Import, Convention => C, External_Name => "free";
+
+   begin
+      if Item /= null then
+         free (As_Address (Item));
+         Item := null;
+      end if;
+   end Free_String;
+
    ------------
    -- Length --
    ------------
@@ -144,6 +168,36 @@ package body ESPIDF.C_Strings is
          end if;
       end return;
    end Length;
+
+   ----------------
+   -- New_String --
+   ----------------
+
+   function New_String (Item : String) return const_char_ptr is
+      function As_const_char_ptr is
+        new Ada.Unchecked_Conversion (System.Address, const_char_ptr);
+
+      function malloc (size : size_t) return System.Address
+        with Import, Convention => C, External_Name => "malloc";
+
+      Result : System.Address;
+
+   begin
+      Result := malloc (Item'Length + 1);
+
+      declare
+         Src : constant char_array (0 .. Item'Length - 1)
+           with Import, Convention => C, Address => Item'Address;
+         Dst : char_array (0 .. Item'Length)
+           with Import, Convention => C, Address => Result;
+
+      begin
+         Dst (Src'Range) := Src;
+         Dst (Dst'Last)  := nul;
+      end;
+
+      return As_const_char_ptr (Result);
+   end New_String;
 
    --------------------------
    -- To_char_array_string --
