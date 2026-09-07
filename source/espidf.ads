@@ -19,7 +19,7 @@ package ESPIDF with Pure is
    subtype char     is Interfaces.C.char;      use type char;
    subtype int      is Interfaces.C.int;
    subtype int32_t  is Interfaces.Integer_32;  use type int32_t;
-   subtype uint8_t  is Interfaces.Unsigned_8;
+   subtype uint8_t  is Interfaces.Unsigned_8;  use type uint8_t;
    subtype uint16_t is Interfaces.Unsigned_16;
    subtype uint32_t is Interfaces.Unsigned_32; use type uint32_t;
    subtype size_t   is Interfaces.C.size_t;    use type size_t;
