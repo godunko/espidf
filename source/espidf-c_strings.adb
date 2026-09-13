@@ -223,6 +223,47 @@ package body ESPIDF.C_Strings is
       end return;
    end To_char_array_string;
 
+   --------------------------
+   -- To_char_array_string --
+   --------------------------
+
+   function To_char_array_string
+     (Pointer    : const_char_ptr;
+      Max_Length : uint32_t) return char_array_string
+   is
+      Iterator : const_char_ptr := Pointer;
+      Index    : uint32_t       := 0;
+      Length   : uint32_t       := 0;
+
+   begin
+      --  First, compute the length of the resulting array, which is limited
+      --  by `Max_Length`.
+
+      if Pointer /= null then
+         while Iterator.all /= nul and then Length < Max_Length loop
+            Length   := @ + 1;
+            Iterator := @ + 1;
+         end loop;
+      end if;
+
+      --  Allocate the resulting array with the computed length and fill it
+      --  with the characters from the original C string.
+
+      return Result : char_array_string (0 .. Length) do
+         if Pointer /= null then
+            Iterator := Pointer;
+
+            while Iterator.all /= nul and then Index < Length loop
+               Result (Index) := Iterator.all;
+               Index    := @ + 1;
+               Iterator := @ + 1;
+            end loop;
+         end if;
+
+         Result (Result'Last) := nul;
+      end return;
+   end To_char_array_string;
+
    ---------------
    -- To_String --
    ---------------

@@ -70,6 +70,16 @@ package ESPIDF.C_Strings with Pure is
    --  For `null` pointer, an "empty" array is returned (with only the
    --  null-terminator).
 
+   function To_char_array_string
+     (Pointer    : const_char_ptr;
+      Max_Length : uint32_t) return char_array_string;
+   --  Creates and returns an object of `char_array_string` type from a
+   --  `const_char_ptr`. Null-terminator is included in the resulting object.
+   --  Maximum length of the string is limited by `Max_Length`.
+   --
+   --  For `null` pointer, an "empty" array is returned (with only the
+   --  null-terminator).
+
    function To_String (Pointer : const_char_ptr) return String;
    --  Converts the C string pointed to by `Pointer` to an Ada `String`.
    --  The null-terminator is not included in the resulting `String`.
