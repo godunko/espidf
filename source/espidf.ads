@@ -22,7 +22,8 @@ package ESPIDF with Pure is
    subtype uint8_t  is Interfaces.Unsigned_8;  use type uint8_t;
    subtype uint16_t is Interfaces.Unsigned_16;
    subtype uint32_t is Interfaces.Unsigned_32; use type uint32_t;
-   subtype size_t   is Interfaces.C.size_t;    use type size_t;
+   subtype size_t   is Interfaces.Unsigned_32;
+   subtype ssize_t  is Interfaces.Integer_32;
 
    type esp_err_t is new int;
 
