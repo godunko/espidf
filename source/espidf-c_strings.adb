@@ -268,6 +268,15 @@ package body ESPIDF.C_Strings is
    -- To_String --
    ---------------
 
+   function To_String (chars : char_array_string) return String is
+   begin
+      return To_String (As_const_char_ptr (chars));
+   end To_String;
+
+   ---------------
+   -- To_String --
+   ---------------
+
    function To_String (Pointer : const_char_ptr) return String is
       Iterator : const_char_ptr := Pointer;
       Offset   : Natural := 0;

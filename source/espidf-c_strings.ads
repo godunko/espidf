@@ -41,6 +41,10 @@ package ESPIDF.C_Strings with Pure is
    --  that the last character is a null terminator, and that there are no
    --  null characters before the terminator.
 
+   function To_String (chars : char_array_string) return String;
+   --  Converts the C string represented by `chars` to an Ada `String`.
+   --  The null-terminator is not included in the resulting `String`.
+
    --------------
    -- char_ptr --
    --------------
