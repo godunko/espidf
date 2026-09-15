@@ -207,6 +207,31 @@ package body ESPIDF.C_Strings is
    --------------------------
 
    function To_char_array_string
+     (Item : char_array) return char_array_string
+   is
+      Length : uint32_t := 0;
+
+   begin
+      for C of Item loop
+         exit when C = nul;
+
+         Length := @ + 1;
+      end loop;
+
+      return Result : char_array_string (0 .. Length) do
+         for J in 0 .. Length - 1 loop
+            Result (Result'First + J) := Item (Item'First + J);
+         end loop;
+
+         Result (Result'Last) := nul;
+      end return;
+   end To_char_array_string;
+
+   --------------------------
+   -- To_char_array_string --
+   --------------------------
+
+   function To_char_array_string
      (Pointer : const_char_ptr) return char_array_string
    is
       Iterator : const_char_ptr := Pointer;
