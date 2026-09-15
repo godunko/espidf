@@ -77,6 +77,15 @@ package body ESPIDF.C_Strings is
       end if;
    end "+";
 
+   -----------------
+   -- As_char_ptr --
+   -----------------
+
+   function As_char_ptr (Item : in out char_array) return char_ptr is
+   begin
+      return Item (Item'First)'Unchecked_Access;
+   end As_char_ptr;
+
    -----------------------
    -- As_const_char_ptr --
    -----------------------

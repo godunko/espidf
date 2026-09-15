@@ -56,6 +56,12 @@ package ESPIDF.C_Strings with Pure is
 
    type char_ptr is private;
 
+   function As_char_ptr (Item : in out char_array) return char_ptr;
+   --  Returns pointer to the first element of a `char_array` as a `char_ptr`.
+   --
+   --  Caller is responsible for ensuring that the `char_array` remains
+   --  valid for the duration of the use of the returned pointer.
+
    --  type const_char_ptr is private;
    type const_char_ptr is access constant char
      with Convention => C, Storage_Size => 0;
