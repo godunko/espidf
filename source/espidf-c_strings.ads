@@ -27,9 +27,14 @@
 
 package ESPIDF.C_Strings with Pure is
 
-   type char_array_string is array (uint32_t range <>) of aliased char
-     with Convention        => C,
-          Dynamic_Predicate =>
+   type char_array is array (uint32_t range <>) of aliased char
+     with Convention => C;
+   --  This type represents a C array of `char`. There is no assumption of
+   --  its content, in particular, it does not assume a null terminator, and
+   --  it doesn't disallow use of `nul` as an item.
+
+   type char_array_string is new char_array
+     with Dynamic_Predicate =>
             char_array_string'Length > 0
               and then
                 char_array_string (char_array_string'Last) = Interfaces.C.nul

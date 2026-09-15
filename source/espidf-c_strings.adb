@@ -13,12 +13,6 @@ package body ESPIDF.C_Strings is
 
    use type System.Storage_Elements.Storage_Offset;
 
-   type char_array is array (uint32_t range <>) of aliased char
-     with Convention => C;
-   --  This type represents a C array of `char`. There is no assumption of
-   --  its content, in particular, it does not assume a null terminator, or
-   --  use of `nul` as an item.
-
    function "+"
      (Left  : const_char_ptr;
       Right : uint32_t) return const_char_ptr;
