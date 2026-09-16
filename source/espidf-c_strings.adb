@@ -219,9 +219,11 @@ package body ESPIDF.C_Strings is
       end loop;
 
       return Result : char_array_string (0 .. Length) do
-         for J in 0 .. Length - 1 loop
-            Result (Result'First + J) := Item (Item'First + J);
-         end loop;
+         if Length /= 0 then
+            for J in 0 .. Length - 1 loop
+               Result (Result'First + J) := Item (Item'First + J);
+            end loop;
+         end if;
 
          Result (Result'Last) := nul;
       end return;
