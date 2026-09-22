@@ -1,4 +1,24 @@
 
+## Binding of `char*` and `const char*`
+
+`char*` and `const char*` types are commonly used in C to transfer both string and binary data. Because C does not convey ownership transfer or memory safety rules through its type system, the following conventions are used when binding these types to Ada API:
+
+### 1. `const char*` (Read-Only Strings)
+
+* **String with immediate copy:** Map to `char_array_string` when the C function expects a null-terminated string and creates an internal copy of the data during the call.
+* **String with persistent lifetime:** Map to `const_char_ptr` when the content is a null-terminated string, but the C API expects the application to manage and guarantee the string's lifetime for later use.
+
+Note: this rules need to be extended for mutable/out/raw byte sequences
+
+---
+
+### Mapping Quick Reference
+
+| C Parameter Type | Content Type | Ownership / Lifetime | Recommended Ada Mapping |
+| :--- | :--- | :--- | :--- |
+| `const char*` | Null-terminated string | Copied immediately by C | `char_array_string` |
+| `const char*` | Null-terminated string | Application retains ownership | `const_char_ptr` |
+
 ## ESP-IDF Error Handling
 
 Many ESP-IDF functions return an error code.
