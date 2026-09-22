@@ -60,6 +60,8 @@ package ESPIDF.C_Strings with Pure is
 
    type char_ptr is private;
 
+   Null_char_ptr : constant char_ptr;
+
    function As_char_ptr (Item : in out char_array) return char_ptr;
    --  Returns pointer to the first element of a `char_array` as a `char_ptr`.
    --
@@ -159,5 +161,7 @@ private
    type char_ptr is access all char
      with Convention => C, Storage_Size => 0;
    pragma No_Strict_Aliasing (char_ptr);
+
+   Null_char_ptr : constant char_ptr := null;
 
 end ESPIDF.C_Strings;
