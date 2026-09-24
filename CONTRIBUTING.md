@@ -121,7 +121,7 @@ private
 ```
 
 ```
-int __ada_SIZEOF_httpd_config_t = sizeof(httpd_config_t);
+const int __ada_SIZEOF_httpd_config_t = sizeof(httpd_config_t);
 
 void __ada_HTTPD_DEFAULT_CONFIG(httpd_config_t *cfg)
 {
