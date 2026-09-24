@@ -7,6 +7,7 @@
 pragma Ada_2022;
 
 with Interfaces.C;
+private with System.Storage_Elements;
 
 package ESPIDF with Pure is
 
@@ -49,5 +50,21 @@ package ESPIDF with Pure is
    ESPIDF_Error : exception;
    --  Raised when an ESP-IDF error occurs and not explicitly handled by the
    --  application.
+
+private
+
+   --  `C_Storage_Element` and `C_Object_Storage` types are used to represent
+   --  storage for objects of C types. These storage is "allocated" at Ada
+   --  side but expected to be used by C code only.
+   --
+   --  Recommended templates for defining storage for C objects see in
+   --  CONTRIBUTING.md.
+
+   type C_Storage_Element is
+     new System.Storage_Elements.Storage_Element with Convention => C;
+
+   type C_Object_Storage is array (int range <>) of C_Storage_Element
+     with Convention     => C,
+          Component_Size => System.Storage_Unit;
 
 end ESPIDF;
