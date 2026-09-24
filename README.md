@@ -22,6 +22,7 @@ The following crates build upon this base layer:
  * [espidf_mdns](https://github.com/godunko/espidf_mdns) bindings of ESP-Protocols mDNS Service
  * [espidf_netif](https://github.com/godunko/espidf_netif): bindings of ESP-IDF NETIF library
  * [espidf_nvs_flash](https://github.com/godunko/espidf_nvs_flash): bindings of ESP-IDF Non-Volatile Storage Library
+ * [espidf_partition](https://github.com/godunko/espidf_partition): bindings of Partition API
  * [espidf_spiffs](https://github.com/godunko/espidf_spiffs): bindings of ESP-IDF SPIFFS Filesystem
  * [espidf_wifi](https://github.com/godunko/espidf_wifi): bindings of ESP-IDF WiFi
  * (More components coming soon)
