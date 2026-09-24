@@ -48,6 +48,30 @@ private
    -- Full declaration of this type is not visible in "esp_netif.h"
 ```
 
+### Binding C Types with Zero Default Initialization
+
+When binding C struct types that require zero-initialization by default, use the Ada record template below.
+This pattern ensures that any instances of the type declared in Ada are automatically initialized to zero (all bytes set to `0`) without explicit assignment, matching standard C runtime expectations for zeroed structures.
+
+```
+   type esp_partition_t is limited private;
+
+private
+
+   sizeof_esp_partition_t : constant int
+     with Import, Convention => C,
+          External_Name => "__ada_SIZEOF_esp_partition_t";
+
+   type esp_partition_t is new C_Object_Storage (1 .. sizeof_esp_partition_t)
+     with Convention              => C,
+          Default_Component_Value => 0;
+```
+
+```
+const int __ada_SIZEOF_esp_partition_t = sizeof(struct esp_partition_t);
+
+```
+
 ## Binding Types with Non-Zero Default Initialization
 
 For C struct types that require specific, non-zero default field values (such as configurations initialized via C macros like `HTTPD_DEFAULT_CONFIG()`), Ada bindings encapsulate the C struct as a limited, private, finalizable type.
@@ -61,22 +85,23 @@ private
 
    sizeof_httpd_config_t : constant int
       with Import, Convention => C,
-           Link_Name => "__ada_sizeof_httpd_config_t";
+           Link_Name => "__ada_SIZEOF_httpd_config_t";
 
    type httpd_config_t_Storage is
-     new System.Storage_Elements.Storage_Array
-       (1 .. System.Storage_Elements.Storage_Count
-               (sizeof_httpd_config_t)) with Convention => C;
+     new C_Object_Storage (1 .. sizeof_httpd_config_t)
+       with Convention => C;
 
    procedure Initialize (Self : in out httpd_config_t);
 
    type httpd_config_t is limited record
-      Storage : httpd_config_t_Storage := (others => 0);
+      Storage : httpd_config_t_Storage;
    end record
-     with Convention => C,
+     with Convention  => C,
           Finalizable =>
             (Initialize           => Initialize,
              Relaxed_Finalization => True);
+
+   pragma Assert (httpd_config_t'Size = sizeof_httpd_config_t * C_Storage_Element'Size);
 ```
 
 ```
@@ -96,7 +121,7 @@ private
 ```
 
 ```
-int __ada_sizeof_httpd_config_t = sizeof(httpd_config_t);
+int __ada_SIZEOF_httpd_config_t = sizeof(httpd_config_t);
 
 void __ada_HTTPD_DEFAULT_CONFIG(httpd_config_t *cfg)
 {
