@@ -68,6 +68,20 @@ package ESPIDF.C_Strings with Pure is
    --  Caller is responsible for ensuring that the `char_array` remains
    --  valid for the duration of the use of the returned pointer.
 
+   function To_String (Pointer : char_ptr) return String;
+   --  Converts the C string pointed to by `Pointer` to an Ada `String`.
+   --  The null-terminator is not included in the resulting `String`.
+   --
+   --  For a null pointer, returns an empty string.
+
+   function Length (Pointer : char_ptr) return uint32_t;
+   --  Returns the length of the C string pointed to by `Pointer`, not
+   --  including the null-terminator. For a null pointer, returns 0.
+
+   --------------------
+   -- const_char_ptr --
+   --------------------
+
    --  type const_char_ptr is private;
    type const_char_ptr is access constant char
      with Convention => C, Storage_Size => 0;

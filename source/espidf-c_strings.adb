@@ -14,12 +14,43 @@ package body ESPIDF.C_Strings is
    use type System.Storage_Elements.Storage_Offset;
 
    function "+"
+     (Left  : char_ptr;
+      Right : uint32_t) return char_ptr;
+
+   function "+"
      (Left  : const_char_ptr;
       Right : uint32_t) return const_char_ptr;
 
    function "+"
      (Left  : const_char_ptr_const_array;
       Right : uint32_t) return const_char_ptr_const_array;
+
+   ---------
+   -- "+" --
+   ---------
+
+   function "+"
+     (Left  : char_ptr;
+      Right : uint32_t) return char_ptr
+   is
+      function To_Address is
+        new Ada.Unchecked_Conversion (char_ptr, System.Address);
+
+      function To_char_ptr is
+        new Ada.Unchecked_Conversion (System.Address, char_ptr);
+
+   begin
+      if Left = null then
+         return null;
+
+      else
+         return
+           To_char_ptr
+             (To_Address (Left)
+                + System.Storage_Elements.Storage_Offset
+                    (char'Max_Size_In_Storage_Elements * Right));
+      end if;
+   end "+";
 
    ---------
    -- "+" --
@@ -135,6 +166,24 @@ package body ESPIDF.C_Strings is
          Item := null;
       end if;
    end Free_String;
+
+   ------------
+   -- Length --
+   ------------
+
+   function Length (Pointer : char_ptr) return uint32_t is
+      Iterator : char_ptr := Pointer;
+
+   begin
+      return Result : uint32_t := 0 do
+         if Pointer /= null then
+            while Iterator.all /= nul loop
+               Result   := Result + 1;
+               Iterator := Iterator + 1;
+            end loop;
+         end if;
+      end return;
+   end Length;
 
    ------------
    -- Length --
@@ -301,6 +350,26 @@ package body ESPIDF.C_Strings is
    function To_String (chars : char_array_string) return String is
    begin
       return To_String (As_const_char_ptr (chars));
+   end To_String;
+
+   ---------------
+   -- To_String --
+   ---------------
+
+   function To_String (Pointer : char_ptr) return String is
+      Iterator : char_ptr := Pointer;
+      Offset   : Natural := 0;
+
+   begin
+      return Result : String (1 .. Natural (Length (Pointer))) do
+         if Pointer /= null then
+            while Iterator.all /= nul loop
+               Result (Result'First + Offset) := Character (Iterator.all);
+               Offset   := @ + 1;
+               Iterator := @ + 1;
+            end loop;
+         end if;
+      end return;
    end To_String;
 
    ---------------
