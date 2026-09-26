@@ -128,3 +128,7 @@ void __ada_HTTPD_DEFAULT_CONFIG(httpd_config_t *cfg)
     *cfg = (httpd_config_t)HTTPD_DEFAULT_CONFIG();
 }
 ```
+
+## Documentation
+
+Conventions for documenting bindings in GNATdoc format are described in [DOCUMENTATION.md](DOCUMENTATION.md).
