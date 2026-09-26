@@ -29,21 +29,36 @@ package ESPIDF with Pure is
    type esp_err_t is new int;
 
    ESP_OK                   : constant esp_err_t := 0;
+   --  `esp_err_t` value indicating success (no error).
    ESP_FAIL                 : constant esp_err_t := -1;
+   --  Generic `esp_err_t` code indicating failure.
 
    ESP_ERR_NO_MEM           : constant esp_err_t := 16#101#;
+   --  Out of memory.
    ESP_ERR_INVALID_ARG      : constant esp_err_t := 16#102#;
+   --  Invalid argument.
    ESP_ERR_INVALID_STATE    : constant esp_err_t := 16#103#;
+   --  Invalid state.
    ESP_ERR_INVALID_SIZE     : constant esp_err_t := 16#104#;
+   --  Invalid size.
    ESP_ERR_NOT_FOUND        : constant esp_err_t := 16#105#;
+   --  Requested resource not found.
    ESP_ERR_NOT_SUPPORTED    : constant esp_err_t := 16#106#;
+   --  Operation or feature not supported.
    ESP_ERR_TIMEOUT          : constant esp_err_t := 16#107#;
+   --  Operation timed out.
    ESP_ERR_INVALID_RESPONSE : constant esp_err_t := 16#108#;
+   --  Received response was invalid.
    ESP_ERR_INVALID_CRC      : constant esp_err_t := 16#109#;
+   --  CRC or checksum was invalid.
    ESP_ERR_INVALID_VERSION  : constant esp_err_t := 16#10A#;
+   --  Version was invalid.
    ESP_ERR_INVALID_MAC      : constant esp_err_t := 16#10B#;
+   --  MAC address was invalid.
    ESP_ERR_NOT_FINISHED     : constant esp_err_t := 16#10C#;
+   --  Operation has not fully completed.
    ESP_ERR_NOT_ALLOWED      : constant esp_err_t := 16#10D#;
+   --  Operation is not allowed.
 
    function nul return char is (Interfaces.C.nul) with Static;
 
