@@ -25,7 +25,7 @@ The following crates build upon this base layer:
  * [espidf_nvs_flash](https://github.com/godunko/espidf_nvs_flash): bindings of ESP-IDF Non-Volatile Storage Library
  * [espidf_partition](https://github.com/godunko/espidf_partition): bindings of Partition API
  * [espidf_spiffs](https://github.com/godunko/espidf_spiffs): bindings of ESP-IDF SPIFFS Filesystem
- * [espidf_wear_levelling](https://github.com/godunko/espidf-wear_levelling): bindings of Wear Levelling API
+ * [espidf_wear_levelling](https://github.com/godunko/espidf_wear_levelling): bindings of Wear Levelling API
  * [espidf_tinyusb](https://github.com/godunko/espidf_tinyusb): bindings of USB driver
  * [espidf_tinyusb_msc](https://github.com/godunko/espidf_tinyusb_msc): bindings of USB Mass Storage Class
  * [espidf_wifi](https://github.com/godunko/espidf_wifi): bindings of ESP-IDF WiFi
