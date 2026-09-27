@@ -41,7 +41,7 @@ To jumpstart your development, we provide templates that configure the GNAT proj
 
 ## Usage
 
-Once your project structure is set up from the Project Template, the development workflow involves two main steps:
+Once your project structure is set up from the Project Template, the development workflow involves the following steps:
 
 1. Ada Dependencies: Use Alire to include the binding's crates into your Ada application.
 
@@ -60,6 +60,14 @@ add_prebuilt_library(app_main "${COMPONENT_LIB}"
     REQUIRES esp_driver_i2c)
 ```
 
-3. Build
+3. Build Environment: Some binding crates contain C glue code, which can be compiled only inside the ESP-IDF build environment.
+By default only Ada sources are compiled (this allows Alire to build the crates standalone, e.g. when publishing), so the application must enable compilation of C sources in its `alire.toml`:
+
+```
+[configuration.values]
+espidf.Build_Environment = "espidf"
+```
+
+4. Build
 
 The project can then be built using the standard ESP-IDF workflow (e.g., `idf.py build`), which will invoke the GNAT compiler for the Ada sources and link them with the specified IDF components.

@@ -129,6 +129,19 @@ void __ada_HTTPD_DEFAULT_CONFIG(httpd_config_t *cfg)
 }
 ```
 
+## C Glue Code
+
+C glue code of the binding crate can be compiled only inside the ESP-IDF build environment, while Alire builds the crate standalone (e.g. when publishing).
+To support both cases, project file of the crate that contains C sources should use the list of languages provided by the `espidf` crate:
+
+```
+   for Languages use ESPIDF.Crate_Languages_Ada_C;
+```
+
+It contains only `"Ada"` by default, and both `"Ada"` and `"C"` when the application sets the `espidf.Build_Environment` configuration variable to `"espidf"`.
+
+Project files of crates without C sources don't need to specify languages.
+
 ## Documentation
 
 Conventions for documenting bindings in GNATdoc format are described in [DOCUMENTATION.md](DOCUMENTATION.md).
