@@ -22,5 +22,8 @@ generate_ada = false
 generate_c = false
 generate_gpr = true
 
+[configuration.variables]
+Build_Environment = { type = "enum", values = ["ada_only", "espidf"], default = "ada_only" }
+
 [[depends-on]]
 a0b_base = "*"
