@@ -6,7 +6,7 @@ long-description = """
 Root crate of the Ada bindings for the Espressif IoT Development Framework (ESP-IDF).
 
 Provides definitions shared by all `espidf_*` binding crates:
-- C types used across ESP-IDF APIs (`esp_err_t`, `size_t`, `gpio_num_t`, ...);
+- C types used across ESP-IDF APIs (`esp_err_t`, `size_t`, ...);
 - conversion of strings between Ada and C;
 - conversion of `esp_err_t` error codes into Ada exceptions.
 """
