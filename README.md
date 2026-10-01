@@ -1,4 +1,4 @@
-# Ada/ESP-IDF Binding
+# Ada/ESP-IDF
 
 This is the base crate for Ada bindings to the ESP-IDF (Espressif IoT Development Framework).
 It provides the foundational type definitions and root package hierarchy required to build Ada applications for Espressif SoC platforms.
