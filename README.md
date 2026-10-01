@@ -17,18 +17,18 @@ The following crates build upon this base layer:
  * [espidf_console](https://github.com/godunko/espidf_console): binding of ESP-IDF Console
  * [espidf_driver_gpio](https://github.com/RREE/espidf_driver_gpio): bindings for setting and reading GPIOs
  * [espidf_driver_i2c](https://github.com/godunko/espidf_driver_i2c): bindings of the I2C peripheral driver
- * [espidf_event](https://github.com/godunko/espidf_event): bindings of Event Loop library
- * [espidf_fatfs](https://github.com/godunko/espidf_fatfs): bindings of FAT Filesystem Support component
- * [espidf_http_server](https://github.com/godunko/espidf_http_server) bindings of HTTP Server
- * [espidf_mdns](https://github.com/godunko/espidf_mdns) bindings of ESP-Protocols mDNS Service
- * [espidf_netif](https://github.com/godunko/espidf_netif): bindings of ESP-IDF NETIF library
- * [espidf_nvs_flash](https://github.com/godunko/espidf_nvs_flash): bindings of ESP-IDF Non-Volatile Storage Library
- * [espidf_partition](https://github.com/godunko/espidf_partition): bindings of Partition API
- * [espidf_spiffs](https://github.com/godunko/espidf_spiffs): bindings of ESP-IDF SPIFFS Filesystem
- * [espidf_wear_levelling](https://github.com/godunko/espidf_wear_levelling): bindings of Wear Levelling API
- * [espidf_tinyusb](https://github.com/godunko/espidf_tinyusb): bindings of USB driver
- * [espidf_tinyusb_msc](https://github.com/godunko/espidf_tinyusb_msc): bindings of USB Mass Storage Class
- * [espidf_wifi](https://github.com/godunko/espidf_wifi): bindings of ESP-IDF WiFi
+ * [espidf_event](https://github.com/godunko/espidf_event): Event Loop Library
+ * [espidf_fatfs](https://github.com/godunko/espidf_fatfs): FAT Filesystem Support
+ * [espidf_http_server](https://github.com/godunko/espidf_http_server) HTTP Server
+ * [espidf_mdns](https://github.com/godunko/espidf_mdns) mDNS Service
+ * [espidf_netif](https://github.com/godunko/espidf_netif): ESP-NETIF
+ * [espidf_nvs_flash](https://github.com/godunko/espidf_nvs_flash): Non-Volatile Storage Library
+ * [espidf_partition](https://github.com/godunko/espidf_partition): Partitions API
+ * [espidf_spiffs](https://github.com/godunko/espidf_spiffs): SPIFFS Filesystem
+ * [espidf_wear_levelling](https://github.com/godunko/espidf_wear_levelling): Wear Levelling API
+ * [espidf_tinyusb](https://github.com/godunko/espidf_tinyusb): USB Device Stack
+ * [espidf_tinyusb_msc](https://github.com/godunko/espidf_tinyusb_msc): USB Device Stack/Mass Storage Class
+ * [espidf_wifi](https://github.com/godunko/espidf_wifi): WiFi
  * (More components coming soon)
 
 ## Getting Started: Project Template
